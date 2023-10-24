@@ -1,5 +1,3 @@
-import os
-
 with open('F1.txt', 'w+') as fileF1:
 
     textByUser = 0
