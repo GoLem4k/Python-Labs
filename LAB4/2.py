@@ -55,11 +55,13 @@ cities = [City('Италия:', 900), City('Польша:', 600), City('Росс
 
 transports = [Plane(), Train(), Auto()]
 
-min_prize = None;
-for transport in transports:
-    transport.methodOfTransportation()
-    for city in cities:
-        tp = city.getTravelPrice(transport.price)
-        min_prize = tp if (min_prize == None) else tp if (tp < min_prize) else min_prize
-        print(city.name, 'расстояние -', city.distance, 'цена -', tp, 'время поездки -', city.getTravelTime(transport.speed))
+with open("travels.txt", "w") as fileTravels:
+    min_prize = None;
+    for transport in transports:
+        transport.methodOfTransportation()
+        for city in cities:
+            tp = city.getTravelPrice(transport.price)
+            min_prize = tp if (min_prize == None) else tp if (tp < min_prize) else min_prize
+            print(city.name, 'расстояние -', city.distance, 'цена -', tp, 'время поездки -', city.getTravelTime(transport.speed))
+            fileTravels.write(city.name + ' расстояние - ' + str(city.distance) + ' цена - ' + str(tp) + ' время поездки - ' + str(city.getTravelTime(transport.speed)) + "\n")
 print("Лучшая цена:", min_prize)
