@@ -9,8 +9,6 @@ class Door:
 
 class Room:
 
-    doors = []
-    windows = []
     def __init__(self, length, width, height, doors = None, windows = None):
         self.length = length
         self.width = width
