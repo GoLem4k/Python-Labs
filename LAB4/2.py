@@ -1,7 +1,4 @@
 class City():
-    name = ''
-    distance = int() #Километров до города
-
     def getTravelPrice(self, price):
         return self.distance * price
     
@@ -13,12 +10,14 @@ class City():
         self.distance = distance
 
 class Transport():
+    transports_amount = 0
 
-    speed = int() #Скорость (Километров в час)
-    price = int() #Цена за километр пути
+    @classmethod
+    def getTransportAmount(cls):
+        return cls.transports_amount
 
     def methodOfTransportation():
-        print('Способо передвижения')
+        print('Способо передвижения: None')
         
 
 class Plane(Transport):
@@ -27,6 +26,7 @@ class Plane(Transport):
         self.name = 'Самолёт'
         self.speed = 800
         self.price = 5
+        Transport.transports_amount += 1
 
     def methodOfTransportation(self):
         print('Способ передвижения: Самолёт')
@@ -37,6 +37,7 @@ class Train(Transport):
         self.name = 'Поезд'
         self.speed = 160
         self.price = 4
+        Transport.transports_amount += 1
 
     def methodOfTransportation(self):
         print('Способ передвижения: Поезд')
@@ -47,6 +48,7 @@ class Auto(Transport):
         self.name = 'Автомобиль'
         self.speed = 80
         self.price = 2
+        Transport.transports_amount += 1
 
     def methodOfTransportation(self):
         print('Способ передвижения: Автомобиль')
@@ -64,4 +66,5 @@ with open("travels.txt", "w") as fileTravels:
             min_prize = tp if (min_prize == None) else tp if (tp < min_prize) else min_prize
             print(city.name, 'расстояние -', city.distance, 'цена -', tp, 'время поездки -', city.getTravelTime(transport.speed))
             fileTravels.write(city.name + ' расстояние - ' + str(city.distance) + ' цена - ' + str(tp) + ' время поездки - ' + str(city.getTravelTime(transport.speed)) + "\n")
-print("Лучшая цена:", min_prize)
+print(f"Лучшая цена: {min_prize}")
+print(f"Количество транспортных средств: {Auto.getTransportAmount()}")
